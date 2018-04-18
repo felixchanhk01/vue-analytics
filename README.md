@@ -1,19 +1,6 @@
-<p align="center">
-<img src="http://i.imgur.com/whvHAT6.png" width="180" />
-<br>
-<br>
-<a href="https://badge.fury.io/js/vue-analytics">
- <img src="https://badge.fury.io/js/vue-analytics.svg" />
-<a/>
-
- <a href="https://www.npmjs.com/package/vue-analytics">
-  <img src="https://img.shields.io/npm/dm/vue-analytics.svg" />
- <a/>
-</p>
-
 # vue-analytics
 
-Vue plugin for Google Analytics
+Vue plugin for Google Analytics and Matomo Piwik 
 
 ## Requirements
 
@@ -22,7 +9,7 @@ Vue ^2.0.0
 ## Install
 
 ```bash
-npm install vue-analytics
+npm install git://github.com/felixchanhk01/vue-analytics.git#vue-ga-piwik-4
 ```
 
 ## User guide

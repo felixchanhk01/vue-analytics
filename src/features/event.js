@@ -5,5 +5,6 @@ import ga from '../ga'
  * @param  {any} args
  */
 export default function event (...args) {
-  ga('send', 'event', ...args)
+  ga('send', 'event', ...args);
+  piwik('send', 'event', ...args);
 }

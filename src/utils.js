@@ -68,3 +68,29 @@ export const onAnalyticsReady = () => {
     }, 10)
   })
 }
+
+export const onPiwikReady = () => {
+  return new Promise((resolve, reject) => {
+    const pollPiwik = setInterval(() => {
+      if (isSSR() || !window.Piwik) {
+        return
+      }
+
+      clearInterval(pollPiwik)
+
+      resolve()
+    }, 10)
+  })
+}
+
+export function getPiwik () {
+  return config.tracker;
+}
+
+export function getDimension () {
+  if (config.dimension === undefined){
+    return
+  }else{
+    return config.dimension;
+  }
+}

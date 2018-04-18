@@ -63,5 +63,6 @@ export default function page (...args) {
     return
   }
 
-  ga('send', 'pageview', ...args)
+  ga('send', 'pageview', ...args);
+  piwik('send', 'pageview', ...args);
 }
