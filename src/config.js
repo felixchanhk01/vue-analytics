@@ -52,7 +52,11 @@ const defaultConfig = {
   beforeFirstHit: noop,
   ready: noop,
 
-  untracked: []
+  untracked: [],
+
+  piwikEndpoint: null,
+  piwikSiteId: 0,
+  dimensions: null
 }
 
 let config = { ...defaultConfig }
@@ -67,6 +71,27 @@ export function reset () {
 
 export function getId () {
   return !config.id ? [] : [].concat(config.id)
+}
+
+export function getPiwik () {
+  let userId = null;
+  if ( config.fields !== null){
+    if ( config.fields.userId !== null ){
+      userId = config.fields.userId;
+    }
+  }
+  
+  if( !config.piwikEndpoint || config.piwikSiteId === null ){
+    return ({piwikEndpoint: null, piwikSiteId: null})
+  }else{
+    return ({piwikEndpoint: config.piwikEndpoint, 
+      piwikSiteId: config.piwikSiteId, 
+      userId: userId})
+  }
+}
+
+export function getDimensions () {
+  return (config.dimensions);
 }
 
 export default config

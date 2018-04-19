@@ -16,3 +16,5 @@ Vue.use(VueAnalytics, {
   }
 })
 ```
+
+However, Piwik endpoint does not support sending events in batch. Therefore, sending Piwik events will ignore parameters in `batch`.

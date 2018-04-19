@@ -57,7 +57,7 @@ export function getTracker (tracker) {
 export function onAnalyticsReady () {
   return new Promise((resolve, reject) => {
     const poll = setInterval(() => {
-      if (typeof window === 'undefined' || !window.ga) {
+      if (typeof window === 'undefined' || !window.ga || !window.Piwik) {
         return
       }
 
@@ -101,4 +101,12 @@ export function isRouter (data) {
 
 export function hasProps (props) {
   return Object.keys(props).length > 0
+}
+
+export function getDimension () {
+  if (config.dimension === undefined){
+    return
+  }else{
+    return config.dimension;
+  }
 }

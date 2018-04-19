@@ -8,6 +8,7 @@ import social from 'lib/social'
 import time from 'lib/time'
 import ecommerce from 'lib/ecommerce'
 import screenview from 'lib/screenview'
+import piwik from 'lib/piwik'
 import config from '../config'
 
 export default {
@@ -21,5 +22,6 @@ export default {
   time,
   screenview,
   ecommerce,
+  piwik,
   commands: config.commands
 }
