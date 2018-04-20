@@ -14,7 +14,6 @@ export default function piwik (method, ...args) {
     tracker.setUserId(userId);
   }
 
-  console.log(window.Piwik);
   if(method === 'pageview'){
     // Page view events, send dimension
     const dimensions = getDimensions();
