@@ -13,7 +13,7 @@ export default () => {
   const { wait, id, disabled, debug, disableScriptLoader } = config
   const filename = debug.enabled ? 'analytics_debug' : 'analytics'
   const resource = `https://www.google-analytics.com/${filename}.js`
-  const piwik_source = 'piwik/piwik.js'
+  const piwik_source = 'static/piwik.min.js'
 
   if (!id) {
     throw new Error(
@@ -22,17 +22,9 @@ export default () => {
   }
 
   if (!window.ga || !disableScriptLoader) {
-    loadScript(resource).catch(() => {
+    loadScript(resource).then(() => console.log('ga')).catch(() => {
       console.error(
         `[vue-analytics] An error occured trying to load ${resource}. Please check your connection.`
-      )
-    })
-  }
-
-  if (!window.Piwik || !disableScriptLoader) {
-    loadScript(piwik_source).catch(() => {
-      console.error(
-        `[vue-analytics] An error occured trying to load ${piwik_source}. Please check your connection.`
       )
     })
   }
