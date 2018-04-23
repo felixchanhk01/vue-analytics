@@ -30,8 +30,10 @@ export default function piwik (method, ...args) {
     if (dimensions){
       Object.entries(dimensions).map(row => {
         const [key, value] = row;
-        const newKey = parseInt(key.match('mension([0-9]+)')[1]);
-        tracker.setCustomDimension(newKey, value);
+        if(key.match('mension([0-9]+)')){
+          const newKey = parseInt(key.match('mension([0-9]+)')[1]);
+          tracker.setCustomDimension(newKey, value);
+        }
       });
     }
 
@@ -41,17 +43,17 @@ export default function piwik (method, ...args) {
     if (args.length > 1){
       if( typeof(args[0]) === 'object' ){
         const eventObj = args[0];
-        const category = eventObj.eventCategory?eventObj.eventCategory:null;
-        const action = eventObj.eventAction?eventObj.eventAction:null;
-        const label = eventObj.eventLabel?eventObj.eventLabel:null;
-        const value = eventObj.eventValue?eventObj.eventValue:null;
+        const category = eventObj.eventCategory || null;
+        const action = eventObj.eventAction || null;
+        const label = eventObj.eventLabel || null;
+        const value = eventObj.eventValue || null;
 
         tracker.trackEvent(category, action, label, value);
       }else{
-        const category = args[0]?args[0]:null;
-        const action = args[1]?args[1]:null;
-        const label = args[2]?args[2]:null;
-        const value = args[3]?args[3]:null;
+        const category = args[0] || null;
+        const action = args[1] || null;
+        const label = args[2] || null;
+        const value = args[3] || null;
 
         tracker.trackEvent(category, action, label, value);
       }
