@@ -6,4 +6,11 @@ module.exports = Object.assign({}, blueJest, {
     '^directives/(.*)$': '<rootDir>/src/directives/$1',
     'vue$': 'vue/dist/vue.min.js'
   })
+}, {
+  globals: {
+    'JSON_PIWIK': null,
+    '_paq': [],
+    'AnalyticsTracker': null,
+    'piwik_log': null
+  }
 })
