@@ -36,7 +36,8 @@ Vue ^2.0.0
 ## Install
 
 ```bash
-npm install git://github.com/felixchanhk01/vue-analytics.git#vue-ga-piwik-5
+npm install git://github.com/felixchanhk01/vue-analytics.git#vue-piwik-5
+yarn add git://github.com/felixchanhk01/vue-analytics.git#vue-piwik-5
 ```
 
 ## User guide
