@@ -11,7 +11,7 @@ export default function piwik (method, ...args) {
   const tracker = client.getTracker(piwikEndpoint, piwikSiteId);
 
   if ( userId != null ){
-    tracker.setUserId(userId);
+    tracker.setUserId(userId.toString());
   }
 
   if(method === 'pageview'){
