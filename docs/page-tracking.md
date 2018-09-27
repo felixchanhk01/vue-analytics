@@ -219,3 +219,48 @@ Vue.use(VueAnalytics, {
   }
 })
 ```
+
+## Send tracking either Piwik or GA only
+
+### Automatic tracking
+
+For the cases the pageview for specific page should not be sent, the setting can be added in metadata of router.
+
+```js
+export default new Router({
+  routes: [
+    {
+      path: '/customer/:id',
+      name: 'Customer Detail',
+      component: CustomerPage,
+      meta:{
+        ga: false
+      }
+    },
+    {
+      path: '/',
+      name: 'HelloWorld',
+      component: HelloWorld,
+      meta:{
+        piwik: false
+      }
+    }
+  ]
+})
+```
+
+### Manual pageview fire
+
+Tracking can be fired to specific endpoint manually. Please make sure both `piwik` or `ga` exists inside the object.
+
+```js
+this.$ga.page({
+  page: '/',
+  title: 'Home page',
+  location: window.location.href,
+},
+{
+  piwik: false,
+  ga: true
+})
+```
