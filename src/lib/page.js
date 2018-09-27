@@ -37,28 +37,48 @@ export default function page (...args) {
     const queryString = getQueryString(route.query)
     const base = router && router.options.base
     const needsBase = prependBase && base
+    const piwikSend = route.piwik ? route.piwik : true
+    const gaSend = route.ga ? route.ga : true
 
     let path = route.path + (transformQueryString ? queryString : '')
     path = needsBase ? getBasePath(base, path) : path
 
-    set('page', path)
-    query('send', 'pageview')
-    piwik('pageview', path)
+    if(piwikSend){
+      set('page', path)
+      query('send', 'pageview')
+    }
+    if(gaSend){
+      piwik('pageview', path)
+    }
   } else {
     let path = window.location.href;
     let pageTitle = null;
 
     if( args.length & typeof(args[0]) === 'object' ){
       path = args[0].location?args[0].location:path;
-      pageTitle = args[0].title?args[0].location:title;
+      pageTitle = args[0].title?args[0].location:document.title;
     }
 
-    query('send', 'pageview', ...args)
-    
-    if(pageTitle){
-      piwik('pageview', path, pageTitle)
-    }else{
-      piwik('pageview', path)
+    let argList = [];
+    let trackingStatus = {};
+    args.map(function(x){
+      if(typeof(x) === 'object' && 
+          ('piwik' in x || 'ga' in x)){
+        trackingStatus = x
+      }else{
+        argList.push(x);
+      }
+    });
+
+    if(!'ga' in trackingStatus || trackingStatus.ga){
+      query('send', 'pageview', ...args)
+    }
+    if(!'piwik' in trackingStatus || trackingStatus.piwik){
+      if(pageTitle){
+        piwik('pageview', path, pageTitle)
+      }else{
+        piwik('pageview', path)
+      }
     }
   }
 }
