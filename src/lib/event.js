@@ -13,10 +13,10 @@ export default function event (...args) {
     }
   });
 
-  if(!'ga' in trackingStatus || trackingStatus.ga){
+  if(!('ga' in trackingStatus) || trackingStatus.ga){
     query('send', 'event', ...argList)
   }
-  if(!'piwik' in trackingStatus || trackingStatus.piwik){
+  if(!('piwik' in trackingStatus) || trackingStatus.piwik){
     piwik('event', ...argList)
   }
 }

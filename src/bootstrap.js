@@ -22,7 +22,7 @@ export default () => {
   }
 
   if (!window.ga || !disableScriptLoader) {
-    loadScript(resource).then(() => console.log('ga')).catch(() => {
+    loadScript(resource).then().catch(() => {
       console.error(
         `[vue-analytics] An error occured trying to load ${resource}. Please check your connection.`
       )

@@ -37,17 +37,17 @@ export default function page (...args) {
     const queryString = getQueryString(route.query)
     const base = router && router.options.base
     const needsBase = prependBase && base
-    const piwikSend = route.piwik ? route.piwik : true
-    const gaSend = route.ga ? route.ga : true
+    const piwikSend = route.meta.piwik !== undefined ? route.meta.piwik : true
+    const gaSend = route.meta.ga !== undefined ? route.meta.ga : true
 
     let path = route.path + (transformQueryString ? queryString : '')
     path = needsBase ? getBasePath(base, path) : path
 
-    if(piwikSend){
+    if(gaSend){
       set('page', path)
       query('send', 'pageview')
     }
-    if(gaSend){
+    if(piwikSend){
       piwik('pageview', path)
     }
   } else {
