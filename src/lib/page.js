@@ -2,6 +2,7 @@ import config from '../config'
 import set from 'lib/set'
 import screenview from 'lib/screenview'
 import query from 'lib/query'
+import piwik from 'lib/piwik'
 import {
   noop,
   getQueryString,
@@ -42,8 +43,23 @@ export default function page (...args) {
 
     set('page', path)
     query('send', 'pageview')
+    piwik('pageview', path)
   } else {
+    let path = window.location.href;
+    let pageTitle = null;
+
+    if( args.length & typeof(args[0]) === 'object' ){
+      path = args[0].location?args[0].location:path;
+      pageTitle = args[0].title?args[0].location:title;
+    }
+
     query('send', 'pageview', ...args)
+    
+    if(pageTitle){
+      piwik('pageview', path, pageTitle)
+    }else{
+      piwik('pageview', path)
+    }
   }
 }
 

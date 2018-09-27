@@ -5,6 +5,7 @@ import { onAnalyticsReady } from './helpers'
 import ga from 'directives/ga'
 import * as exception from 'lib/exception'
 import analyticsMiddleware from './vuex-middleware'
+import './piwik/piwik.min'
 
 export default function install (Vue, options = {}) {
   update(options)
